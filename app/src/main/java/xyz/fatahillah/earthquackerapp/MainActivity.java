@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        ArrayList<Earthquake> earthquakesJson = QueryUtils.extractEarthquakes();
-//        ArrayList<Earthquake> earthquakesJson = QueryUtils.extractEarthquakes(QueryUtils.SAMPLE_JSON_RESPONSE);
-        ArrayList<Earthquake> earthquakesJson = new ArrayList<>();
+        ArrayList<Earthquake> earthquakesJson = QueryUtils.extractEarthquakes(QueryUtils.SAMPLE_JSON_RESPONSE);
+//        ArrayList<Earthquake> earthquakesJson = new ArrayList<>();
 
         //find list view
         ListView earthQuakeListView = (ListView) findViewById(R.id.list);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        new DownloadTaskEartQuake().execute();
+//        new DownloadTaskEartQuake().execute();
 
     }
 

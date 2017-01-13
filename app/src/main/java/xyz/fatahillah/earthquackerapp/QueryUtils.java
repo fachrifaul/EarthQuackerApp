@@ -79,7 +79,6 @@ public final class QueryUtils {
 //        // Return the list of earthquakes
 //        return earthquakes;
 //    }
-
     public static ArrayList<Earthquake> extractEarthquakes(String json) {
 
         // Create an empty ArrayList that we can start adding earthquakes to
@@ -101,7 +100,7 @@ public final class QueryUtils {
                 Long time = properties.getLong("time");
                 String url = properties.getString("url");
                 //get data url
-                earthquakes.add(new Earthquake(mag,place,time,url));
+                earthquakes.add(new Earthquake(mag, place, time, url));
             }
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
@@ -115,22 +114,22 @@ public final class QueryUtils {
     }
 
     //create url object from string
-    public static URL createURL(String stringUrl){
+    public static URL createURL(String stringUrl) {
         URL url = null;
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException e) {
-            Log.e(TAG,e.toString());
+            Log.e(TAG, e.toString());
         }
         return url;
     }
 
     //membuat http request dan me return data string dari USGS
-    public static String makeHttoRequest(URL url){
+    public static String makeHttoRequest(URL url) {
         String jsonResponse = "";
 
         //jika url null, maka tidak akan diproses
-        if(url == null){
+        if (url == null) {
             return jsonResponse;
         }
 
@@ -148,27 +147,27 @@ public final class QueryUtils {
 
             //jika request suksess (response code 200)
             //maka baca inputr stream dan parsing response
-            if (urlConnection.getResponseCode() == 200){
+            if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            }else{
-                Log.e(TAG,"Error response");
+            } else {
+                Log.e(TAG, "Error response");
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(TAG,e.toString());
-        }finally {
-            if(urlConnection != null){
+            Log.e(TAG, e.toString());
+        } finally {
+            if (urlConnection != null) {
                 urlConnection.disconnect();
             }
-            if(inputStream != null){
+            if (inputStream != null) {
                 //clode input stream
                 try {
                     inputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e(TAG,e.toString());
+                    Log.e(TAG, e.toString());
                 }
             }
         }
@@ -180,11 +179,11 @@ public final class QueryUtils {
     //konversi input stream ke string yang memuat data json dari server
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
-        if(inputStream != null){
+        if (inputStream != null) {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
-            while (line != null){
+            while (line != null) {
                 output.append(line);
                 line = reader.readLine();
             }
